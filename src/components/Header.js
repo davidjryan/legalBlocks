@@ -9,14 +9,4 @@ const Header = () => {
   )
 }
 
-// const style = Stylesheet.create({
-//   headerContainer: {
-//     flex: 1,
-//     height: 30,
-//     backgroundColor: '#E2D9A2',
-//   },
-// })
-
-
-
 export default Header;
