@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
 import { Header } from './src/components';
 import {
   Platform,
@@ -10,41 +11,39 @@ import {
   FlatList,
   TextInput
 } from 'react-native';
-import Tabs from 'react-native-tabs';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import Store from './src/Store';
 
 export default class App extends Component<{}> {
   render() {
     return (
-      <View style={styles.body}>
-        <View style={styles.asideHeader}>
-          <Text style={styles.asideTitle}>legalBlocks</Text>
-          <Button title="Article" style={styles.field}></Button>
-          <Button title="Asset" style={styles.field}></Button>
-          <Button title="Signature" style={styles.field}></Button>
+      <Provider store={Store}>
+        <View style={styles.body}>
+          <View style={styles.asideHeader}>
+            <Text style={styles.asideTitle}>legalBlocks</Text>
+            <Button title="Article" style={styles.field}></Button>
+            <Button title="Asset" style={styles.field}></Button>
+            <Button title="Signature" style={styles.field}></Button>
+            <Button title="Save" style={styles.field}></Button>
+            <Button title="Delete" style={styles.field}></Button>
+          </View>
+          <View style={styles.main}>
+            <Header />
+            <TextInput style={{flex: 3, margin: 10, padding: 5, backgroundColor: '#E0E2DB',}} multiline={true}></TextInput>
+
+          </View>
         </View>
-        <View style={styles.main}>
-          <Header />
-          <TextInput style={{flex: 3}}></TextInput>
-          <Tabs style={{backgroundColor:'#E2D9A2', height: 30,}}
-                selectedStyle={{color:'#9B2915'}} onSelect={el=>this.setState({page:el.props.name})}>
-            <Text name="first">First</Text>
-            <Text name="second" selectedIconStyle={{borderTopWidth:2,borderTopColor:'red'}}>Second</Text>
-            <Text name="third">Third</Text>
-            <Text name="fourth" selectedStyle={{color:'green'}}>Fourth</Text>
-          </Tabs>
-        </View>
-      </View>
+      </Provider>
     );
   }
 }
 
+{/* <Tabs style={{backgroundColor:'#E2D9A2', height: 30,}}
+      selectedStyle={{color:'#9B2915'}} onSelect={el=>this.setState({page:el.props.name})}>
+  <Text name="first">First</Text>
+  <Text name="second" selectedIconStyle={{borderTopWidth:2,borderTopColor:'red'}}>Second</Text>
+  <Text name="third">Third</Text>
+  <Text name="fourth" selectedStyle={{color:'green'}}>Fourth</Text>
+</Tabs> */}
 {/* // return (
 //   <View style={styles.body}>
 //     <View style={styles.asideHeader}>
@@ -97,5 +96,8 @@ const styles = StyleSheet.create({
   header: {
     height: 30,
     backgroundColor: '#E2D9A2',
+  },
+  field: {
+    color: "#E2D9A2",
   },
 });
